@@ -1,0 +1,8 @@
+We are looking for someone to help us scrap address details (state, city, town, postcode) from four website and save them in an excel file format. The websites have a similar structure, where the companies list their stores locations at the bottom, like a sitemap
+
+example website:
+https://www.edeka.de/marktsuche/velbert.jsp
+https://www.upwork.com/jobs/~012693c82fb320cd53
+
+
+class="sp_marktsuche_crosslinking sp_toggle_group show"
