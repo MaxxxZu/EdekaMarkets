@@ -4,8 +4,7 @@ from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-import random
-import xlsxwriter
+from data_output import Output
 
 
 __location__ = os.path.realpath(
@@ -66,27 +65,16 @@ class Crawler:
         return markets
 
 
-class Output(object):
-    def __init__(self, all_markets):
-        self.all_markets = all_markets
-        self.to_xls()
-
-    def to_xls(self):
-        print('to Xls')
-        with xlsxwriter.Workbook(OUTPUT_LOCATION) as workbook:
-            worksheet = workbook.add_worksheet()
-            for row, value in enumerate(self.all_markets):
-                for col, data in enumerate(value):
-                    worksheet.write(row, col, data)
-
-
-if __name__ == "__main__":
+def main():
     START_URL = 'https://www.edeka.de/marktsuche.jsp'
     CHROME_PATH = os.path.join(__location__, 'chromedriver')
-    OUTPUT_LOCATION = os.path.join(__location__, 'markets.xlsx')
     crawler = Crawler(START_URL)
     driver = crawler._get_web_driver(CHROME_PATH, headless=True)
     crawler.get_page_links(driver)
     markets = crawler.get_page(driver)
     driver.quit()
     Output(markets)
+
+
+if __name__ == "__main__":
+    main()
